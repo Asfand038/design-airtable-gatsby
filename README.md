@@ -1,79 +1,15 @@
-## Setup
+# DESIGN AIRTABLE GATSBY
 
-## Styled Components
+**A production grade React App with typescript**
 
-VS-Extension
+## Project includes:
 
-vscode-styled-components
+1. **Gatsby**.
+2. **Airtable** as headless CMS.
+3. **Algolio** for search services.
+4. **SEO**. 
+5. **Styled-components** for styling.
 
-Regural Setup
+## Live Demo:
 
-```jsx
-import styled from 'styled-components'
-const NameOfElement = styled.htmlElement`
-your
-styles
-go
-here
-`
-```
-
-Global Styles
-
-```jsx
-import { createGlobalStyle } from "styled-components"
-
-const GlobalStyle = createGlobalStyle`
-your
-global
-styles
-go here
-`
-// wrap root element
-export const wrapRootElement = ({ element }) => {
-  return (
-    <>
-      <GlobalStyle />
-      {element}
-    </>
-  )
-}
-
-Both files
-- gatsby-browser.js
-- gatsby-ssr.js
-
-```
-
-## Airtable
-
-[airtable](https://airtable.com/invite/r/h4p0v9Vg)
-
-## env variables
-
-gatsby-config
-
-```js
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
-```
-
-#### ROOT!!!!!!!!!!!!!!!
-
-.env.development
-
-## Algolia
-
-[algolia](https://www.algolia.com/);
-
-## Project Steps
-
-- cover setup
-- styled components global css
-- basic gatsby background image
-- basic navbar
-- about
-- airtable
-- connect to airtable
-- env vars
+You can test a live version of the application here: https://design-gatsby.netlify.app/
