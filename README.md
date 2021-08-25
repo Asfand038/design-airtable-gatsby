@@ -1,6 +1,6 @@
 # DESIGN AIRTABLE GATSBY
 
-**A production grade React App with typescript**
+Gatsby app named **DESIGN** providing decoration services to make homes look stylish and unique.
 
 ## Project includes:
 
