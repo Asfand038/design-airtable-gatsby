@@ -2,12 +2,31 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 import { Link } from 'gatsby'
+
 import { GatsbyContext } from '../context/context'
+
 const Sidebar = () => {
-  
+  const { links, hideSidebar } = useContext(GatsbyContext)
+
   return (
-    <h2>sidebar component</h2>)
+    <Wrapper>
+      <div className="container">
+        <button onClick={hideSidebar}>
+          <MdClose className="icon" />
+        </button>
+        <div className="links">
+          {links.map(({ url, label, icon }, index) => (
+            <Link to={url} key={index} onClick={hideSidebar}>
+              {icon}
+              {label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </Wrapper>
+  )
 }
+
 const Wrapper = styled.aside`
   position: fixed;
   top: 0;
@@ -25,7 +44,7 @@ const Wrapper = styled.aside`
   .container {
     background: var(--clr-white);
     width: 80vw;
-    height: 80vh;
+    height: 91vh;
     border-radius: var(--radius);
     position: relative;
     padding: 4rem 2rem 2rem 2rem;
@@ -69,4 +88,5 @@ const Wrapper = styled.aside`
     }
   }
 `
+
 export default Sidebar

@@ -1,11 +1,33 @@
 import React from 'react'
-import Title from './Title'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
-const GridProjects = ({ projects, title }) => {
+
+import Title from './Title'
+
+const GridProjects = ({ projects, title = 'projects' }) => {
   return (
-    <h2>grid projects</h2>
+    <Wrapper>
+      <Title title={title} />
+      <div className="tile-layout">
+        {projects.map(({ id, data: { name, type, image } }, index) => (
+          <article key={id} className={`div-${index}`}>
+            <GatsbyImage
+              image={getImage(image.localFiles[0])}
+              alt={name}
+              className="img"
+            />
+            <div className="info">
+              <p>- {type} -</p>
+              <h3>{name}</h3>
+            </div>
+          </article>
+        ))}
+      </div>
+      <Link to="/projects" className="btn">
+        all projects
+      </Link>
+    </Wrapper>
   )
 }
 

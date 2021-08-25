@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-
-import Title from './Title'
 import styled from 'styled-components'
-import { FaQuoteRight } from 'react-icons/fa'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { FaQuoteRight } from 'react-icons/fa'
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
 
+import Title from './Title'
+
 const Slider = ({ customers = [] }) => {
-  const [index, setIndex] = React.useState(0)
+  const [index, setIndex] = useState(0)
 
   const nextSlide = () => {
     setIndex(oldIndex => {
@@ -18,6 +18,7 @@ const Slider = ({ customers = [] }) => {
       return index
     })
   }
+
   const prevSlide = () => {
     setIndex(oldIndex => {
       let index = oldIndex - 1
@@ -27,6 +28,7 @@ const Slider = ({ customers = [] }) => {
       return index
     })
   }
+
   useEffect(() => {
     let slider = setInterval(() => {
       setIndex(oldIndex => {
@@ -40,7 +42,7 @@ const Slider = ({ customers = [] }) => {
     return () => {
       clearInterval(slider)
     }
-  }, [index])
+  }, [customers.length])
 
   return (
     <Wrapper className="section">
@@ -65,11 +67,7 @@ const Slider = ({ customers = [] }) => {
 
           return (
             <article className={position} key={customerIndex}>
-              <GatsbyImage
-                image={customerImg}
-                className="img"
-                alt={name}
-              ></GatsbyImage>
+              <GatsbyImage image={customerImg} className="img" alt={name} />
               <h4>{name}</h4>
               <p className="title">{title}</p>
               <p className="text">{quote}</p>
@@ -103,7 +101,7 @@ const Wrapper = styled.div`
     .img {
       border-radius: 50%;
       margin-bottom: 1rem;
-       display: inline-block !important;
+      display: inline-block !important;
     }
     h4 {
       text-transform: uppercase;

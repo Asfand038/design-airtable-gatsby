@@ -1,13 +1,71 @@
 import React, { useEffect, useState } from 'react'
-import Title from './Title'
 import styled from 'styled-components'
 import base from './Airtable'
 import { FaVoteYea } from 'react-icons/fa'
 
+import Title from './Title'
+
 const Survey = () => {
- 
+  const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  const getRecords = async () => {
+    const records = await base('Survey')
+      .select({})
+      .firstPage()
+      .catch(err => console.log(err))
+
+    const newItems = records.map(({ id, fields }) => ({ id, fields }))
+    setItems(newItems)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getRecords()
+  }, [])
+
+  const submitVote = async id => {
+    setLoading(true)
+    const tempItems = [...items].map(item => {
+      if (item.id === id) {
+        let { id, fields } = item
+        fields = { ...fields, votes: fields.votes + 1 }
+        return { id, fields }
+      } else {
+        return item
+      }
+    })
+
+    const records = await base('Survey')
+      .update(tempItems)
+      .catch(err => console.log(err))
+
+    const newItems = records.map(({ id, fields }) => ({ id, fields }))
+    setItems(newItems)
+    setLoading(false)
+  }
+
   return (
-   <h2>survey component</h2>
+    <Wrapper className="section">
+      <div className="container">
+        <Title title="survey" />
+        <h3>most important room in the house?</h3>
+        <ul>
+          {items.map(({ id, fields: { name, votes } }) => (
+            <li key={id}>
+              <div className="key">{name.toUpperCase().substring(0, 2)}</div>
+              <div>
+                <h4>{name}</h4>
+                <p>{votes} votes</p>
+              </div>
+              <button disabled={loading} onClick={() => submitVote(id)}>
+                <FaVoteYea />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Wrapper>
   )
 }
 

@@ -1,11 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Title = () => {
+const Title = ({ title }) => {
   return (
-   <h2>title component</h2>
+    <Wrapper className="section">
+      <h2>
+        <span>/</span>
+        {title}
+      </h2>
+    </Wrapper>
   )
 }
+
 const Wrapper = styled.div`
   text-align: center;
   margin-bottom: 2rem;

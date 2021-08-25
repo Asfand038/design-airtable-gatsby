@@ -1,5 +1,6 @@
 import React from 'react'
 import { createGlobalStyle } from 'styled-components'
+import { ContextProvider } from './src/context/context'
 
 const GlobalStyle = createGlobalStyle`
 /*
@@ -172,9 +173,9 @@ p {
 
 export const addGlobalStyles = ({ element }) => {
   return (
-    <>
+    <ContextProvider>
       <GlobalStyle />
       {element}
-    </>
+    </ContextProvider>
   )
 }
